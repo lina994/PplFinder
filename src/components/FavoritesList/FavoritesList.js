@@ -1,48 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Text from "components/Text";
 import Spinner from "components/Spinner";
-import CheckBox from "components/CheckBox";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import * as S from "./style";
 
-const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggleFavorite }) => {
-  const [hoveredUserId, setHoveredUserId] = useState();
-
-  const handleMouseEnter = (index) => {
-    setHoveredUserId(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredUserId();
-  };
-
-  const handleCheckBoxChange = (isChecked, country) => {
-    if (isChecked) {
-      setCountries([...countries, country]);
-    } else {
-      let updatedCountries = countries.filter((c) => c !== country);
-      setCountries(updatedCountries);
-    }
-  };
+const FavoritesList = ({ users, toggleFavorite, isLoading }) => {
 
   return (
-    <S.UserList>
-      <S.Filters>
-        <CheckBox value="BR" label="Brazil" onChange={handleCheckBoxChange} />
-        <CheckBox value="AU" label="Australia" onChange={handleCheckBoxChange} />
-        <CheckBox value="CA" label="Canada" onChange={handleCheckBoxChange} />
-        <CheckBox value="DE" label="Germany" onChange={handleCheckBoxChange} />
-        <CheckBox value="CH" label="Switzerland" onChange={handleCheckBoxChange} />
-      </S.Filters>
+    <S.FavoritesList>
       <S.List>
         {users.map((user, index) => {
           return (
-            <S.User
-              key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-            >
+            <S.User key={index} >
               <S.UserPicture src={user?.picture.large} alt="" />
               <S.UserInfo>
                 <Text size="22px" bold>
@@ -56,7 +26,7 @@ const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggl
                   {user?.location.city} {user?.location.country}
                 </Text>
               </S.UserInfo>
-              <S.IconButtonWrapper isVisible={index === hoveredUserId || isFavorite(user)}>
+              <S.IconButtonWrapper isVisible={true}>
                 <IconButton onClick={() => toggleFavorite(user)} >
                   <FavoriteIcon color="error" />
                 </IconButton>
@@ -70,8 +40,8 @@ const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggl
           </S.SpinnerWrapper>
         )}
       </S.List>
-    </S.UserList>
+    </S.FavoritesList>
   );
 };
 
-export default UserList;
+export default FavoritesList;
