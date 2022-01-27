@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import * as S from "./style";
 
-const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggleFavorite }) => {
+const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggleFavorite, setLoader, setPage }) => {
   const [hoveredUserId, setHoveredUserId] = useState();
 
   const handleMouseEnter = (index) => {
@@ -24,6 +24,7 @@ const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggl
       let updatedCountries = countries.filter((c) => c !== country);
       setCountries(updatedCountries);
     }
+    setPage(1);
   };
 
   return (
@@ -68,6 +69,9 @@ const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggl
           <S.SpinnerWrapper>
             <Spinner color="primary" size="45px" thickness={6} variant="indeterminate" />
           </S.SpinnerWrapper>
+        )}
+        {!isLoading && users.length != 0 && (
+          <S.Loader ref={setLoader}></S.Loader>
         )}
       </S.List>
     </S.UserList>

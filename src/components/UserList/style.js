@@ -54,3 +54,8 @@ export const Filters = styled.div`
     margin-inline-end: 8px;
   }
 `;
+
+export const Loader = styled.div`
+  width: 100px;
+  min-height: 50px;
+`;
