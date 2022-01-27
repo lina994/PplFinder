@@ -6,6 +6,7 @@ export const usePeopleFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
   const [page, setPage] = useState(1);
+  const [seed, setSeed] = useState(null);
   const [loader, setLoader] = useState(null);
   
   const observer = useRef(
@@ -38,14 +39,16 @@ export const usePeopleFetch = () => {
   async function fetchUsers() {
     setIsLoading(true);
     const countriesFilter = countries === [] ? '' : `&nat=${countries.toString()}`;
-    const response = await axios.get(`https://randomuser.me/api/?results=25&page=${page}${countriesFilter}`);
+    const seedParameterString = seed ? `&seed=${seed}` : '';
+    const response = await axios.get(`https://randomuser.me/api/?results=25&page=${page}${seedParameterString}${countriesFilter}`);
     if (page === 1) {
       setUsers(response.data.results);
+      setSeed(response.data.info.seed);
     } else {
       setUsers([...users, ...response.data.results]);
     }
     setIsLoading(false);
   }
 
-  return { users, isLoading, countries, setCountries, setPage, setLoader };
+  return { users, isLoading, countries, setCountries, setPage, setLoader, setSeed };
 };

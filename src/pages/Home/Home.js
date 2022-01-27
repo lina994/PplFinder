@@ -5,7 +5,7 @@ import { usePeopleFetch, useFavoritesFetch } from "hooks";
 import * as S from "./style";
 
 const Home = () => {
-  const { users, isLoading, countries, setCountries, setPage, setLoader } = usePeopleFetch();
+  const { users, isLoading, countries, setCountries, setPage, setLoader, setSeed } = usePeopleFetch();
   const { isFavorite, toggleFavorite } = useFavoritesFetch();
 
   return (
@@ -17,7 +17,7 @@ const Home = () => {
           </Text>
         </S.Header>
         <UserList users={users} isLoading={isLoading} countries={countries} setCountries={setCountries} isFavorite={isFavorite} toggleFavorite={toggleFavorite} 
-                  setLoader={setLoader} setPage={setPage} />
+                  setLoader={setLoader} setPage={setPage} setSeed={setSeed} />
       </S.Content>
     </S.Home>
   );

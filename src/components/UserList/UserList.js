@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import * as S from "./style";
 
-const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggleFavorite, setLoader, setPage }) => {
+const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggleFavorite, setLoader, setPage, setSeed }) => {
   const [hoveredUserId, setHoveredUserId] = useState();
 
   const handleMouseEnter = (index) => {
@@ -25,6 +25,7 @@ const UserList = ({ users, isLoading, countries, setCountries, isFavorite, toggl
       setCountries(updatedCountries);
     }
     setPage(1);
+    setSeed(null);
   };
 
   return (
