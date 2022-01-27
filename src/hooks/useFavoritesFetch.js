@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 
+// Local storage:
+// - Enable browsers to store key-value pairs.
+// - Data stored in localStorage does not expire.
+
 export const useFavoritesFetch = () => {
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,11 +25,11 @@ export const useFavoritesFetch = () => {
 
   function toggleFavorite(user) {
     const filtredList = favorites.filter((favorite) => favorite.login.uuid !== user.login.uuid);
-    if (filtredList.length === favorites.length) { // add
+    if (filtredList.length === favorites.length) { // add to favorites
       filtredList.push(user);
       localStorage.setItem('favorites', JSON.stringify(filtredList));
       setFavorites(filtredList);
-    } else { // remove
+    } else { // remove from favorites
       localStorage.setItem('favorites', JSON.stringify(filtredList));
       setFavorites(filtredList);
     }

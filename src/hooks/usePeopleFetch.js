@@ -9,6 +9,8 @@ export const usePeopleFetch = () => {
   const [seed, setSeed] = useState(null);
   const [loader, setLoader] = useState(null);
   
+  // Increment page number count when target element is visible to user.
+  // entries - array of target intersecting elements being watched by the IntersectionObserver.
   const observer = useRef(
     new IntersectionObserver(
       (entries) => {
@@ -29,7 +31,7 @@ export const usePeopleFetch = () => {
     if (loader) {
       currentObserver.observe(loader);
     }
-    return () => {
+    return () => {  // Cleanup function
       if (loader) {
           currentObserver.unobserve(loader);
       }
